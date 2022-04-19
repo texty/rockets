@@ -10,24 +10,70 @@
     #test {
         max-width: 1200px;
         width: 99%;
-        margin: auto
+        margin: auto;
+        position:relative;       
+        overflow: hidden;
     }
 
     svg text {
         font-family: sans-serif;
         font-size: 1.5vw;
     }
+
+    #interactive {
+        position: relative;
+        max-width: 1200px;
+        width: 99%;
+        margin: auto;
+    }
+
+    .interactive-title {
+        position:absolute; 
+        top:0; 
+        left:20px; 
+        pointer-events: none;
+    } 
+
+    @media(max-width:800px){
+        .interactive-title {
+            position:relative;            
+            pointer-events: none;
+    } 
+    }
+
+    .interactive-title h2 {
+        font-size: calc(20px+1vw);
+    }
+
+    .interactive-title p {
+        font-size: calc(12px+1vw);
+    }
+
+    #test {
+       
+    }
+
+    #test #back-img {
+        opacity: 0.5; 
+        position:absolute; 
+        top:0; 
+        left:0;
+        width:100%; 
+        z-index:-1
+    }
 </style>
 <body>
 
-
-
-    <div id='test' style='position:relative; width: 100%; overflow: hidden;'>
-        <img src='lines_back.jpg' style='opacity: 0.5; position:absolute; top:0; left:0; width:100%; z-index:-1'/>
-        <h2 style='position:absolute; top:0; left:20px; font-size: calc(20px+1vw); pointer-events: none;'>Як далеко можуть дістати російські ракети, <br> випущені зі самохідних пускових установок</h2>
-
+    <div id='interactive'>
+    <div class='interactive-title'>
+        <h2>Як далеко можуть дістати російські ракети, <br> випущені зі самохідних пускових установок</h2>
+        <p>Рухайте точку вздовж ліній, щоб побачити зону ураження</p>
     </div>
 
+    <div id='test'>
+        <img id='back-img' src='lines_back.jpg'/> 
+    </div>
+</div>
     <script src='libs/d3v5.min.js'></script>
 
 
@@ -45,8 +91,8 @@
  
 
             var dot = svg.append("circle")
-                .attr("cx", 0)
-                .attr("cy", 0)
+                .attr("cx", 1200)
+                .attr("cy", 454)
                 .attr("r", 5)
                 .attr('fill', "black");
 
@@ -54,28 +100,28 @@
             // Create the circle that travels along the curve of chart
             var r1 = 540, r2 = 135;
             var circle_1 = svg.append("circle")
-                .attr("cx", -50)
-                .attr("cy", -50)
+                .attr("cx", 1200)
+                .attr("cy", 454)
                 .attr("r", r1)
                 .attr('fill', "red")
                 .style("opacity", 0.2);
 
             var text_1 = svg.append("text")
-                .attr("x", 0)
-                .attr("y", 0)
+                .attr("x", 1200 - (r1-10))
+                .attr("y", 454)
                 .text("Іскандер-М")
                 .attr('fill', "black");
 
             var circle_2 = svg.append("circle")
-                .attr("cx", -50)
-                .attr("cy", -50)
+                .attr("cx", 1200)
+                .attr("cy", 454)
                 .attr("r", r2)
                 .attr('fill', "red")
                 .style("opacity", 0.2);
 
             var text_2 = svg.append("text")
-                .attr("x", 0)
-                .attr("y", 0)
+                .attr("x", 1200 - (r2-10))
+                .attr("y", 454)
                 .text("Точка-У")
                 .attr('fill', "black");
 
@@ -104,10 +150,9 @@
                 var p = closestPoint(path.node(), m); 
                 var p2 = closestPoint(path2.node(), m);
 
-               /*  console.log('m:', m[0], m[1]);
+               
                 console.log('p1:', p[0], p[1]);
-                console.log('p2:', p2[0], p2[1]);
-                console.log('------------------------'); */
+                
                 
                 if(Math.abs(p[0] - m[0]) < Math.abs(p2[0] - m[0])){
                     dot.attr("cx", p[0]).attr("cy", p[1]);
