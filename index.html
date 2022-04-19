@@ -42,15 +42,13 @@
     }
 
     .interactive-title h2 {
-        font-size: calc(20px+1vw);
+        font-size: calc(20px + 0.7vw);
+        margin-bottom: 0;
     }
 
     .interactive-title p {
-        font-size: calc(12px+1vw);
-    }
-
-    #test {
-       
+        font-size: calc(14px + 0.5vw);
+        margin-top: 10px;
     }
 
     #test #back-img {
@@ -67,7 +65,7 @@
     <div id='interactive'>
     <div class='interactive-title'>
         <h2>Як далеко можуть дістати російські ракети, <br> випущені зі самохідних пускових установок</h2>
-        <p>Рухайте точку вздовж ліній, щоб побачити зону ураження</p>
+        <p>Рухайте точку вздовж ліній, <br> щоб побачити зону ураження</p>
     </div>
 
     <div id='test'>
@@ -151,7 +149,7 @@
                 var p2 = closestPoint(path2.node(), m);
 
                
-                console.log('p1:', p[0], p[1]);
+             /*    console.log('p1:', p[0], p[1]); */
                 
                 
                 if(Math.abs(p[0] - m[0]) < Math.abs(p2[0] - m[0])){
